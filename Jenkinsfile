@@ -18,6 +18,7 @@ pipeline {
                     rm -rf gitleaks*
                 '''
             }
+        }    
         stage('Build') {
             steps {
                 sh 'bash scripts/build.sh'
@@ -50,5 +51,5 @@ pipeline {
         }
     }
 }
-}
+
 
