@@ -9,6 +9,15 @@ pipeline {
     }
 
     stages {
+        stage('Scan for secrets') {
+            steps {
+                sh '''
+                    curl -LO https://github.com/zricethezav/gitleaks/releases/download/v8.9.0/gitleaks_8.9.0_linux_x64.tar.gz
+                    tar -xzf gitleaks_8.9.0_linux_x64.tar.gz
+                    ./gitleaks protect -v // Scan for commonly leaked secrets
+                    rm -rf gitleaks*
+                '''
+            }
         stage('Build') {
             steps {
                 sh 'bash scripts/build.sh'
